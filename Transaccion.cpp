@@ -1,42 +1,26 @@
 #include <iostream>
 #include "lib.h"
 #include <ctime>
+#include <fstream>
 using namespace std;
 
-Transaccion::Transaccion(int numCliente,string tipo,string moneda,double cantidad,int D,int M,int A){
-  numeroCliente = numCliente;
-  tipoTransaccion = tipo;
-  divisa = moneda;
-  monto = cantidad;
-  dia = D;
-  mes = M;
-  anio = A;
+void sistema::guardartransaccion(double num,int numtransaccion,char divisa){
+  ofstream ftransaccion;
+  if (ftransaccion.is_open())
+  {
+    dia=0;
+    mes=0;
+    ano=0;
+    /*ctime setea la fecha*/
+    ftransaccion << dia << " / " << mes << " / " << ano << "\t";
+    ftransaccion << numtransaccion << "\t";
+    ftransaccion << divisa << "\t";
+    ftransaccion << num << endl;
+  }
+  else{
+    cout << "no se pudo abrir el archivo" << endl;
+  }
 }
-
-void Transaccion::set_numeroCliente(int num){
-  numeroCliente = num;
-}
-
-void Transaccion::set_tipoTransaccion(string tipo){
-  tipoTransaccion = tipo;
-}
-
-void Transaccion::set_divisa(string moneda){
-  divisa = moneda;
-}
-
-void Transaccion::set_monto(double num){
-  monto = num;
-}
-
-void Transaccion::set_dia(int num){
-
-}
-
-/*Falta ver como sacar la fecha de hoy automaticamente*/
-
-
-
 
 
 
