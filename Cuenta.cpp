@@ -1,12 +1,14 @@
 #include <iostream>
-#include <string>
 #include <ctime>
 #include <cstdlib>
 #include "lib.h"
+using namespace std;
+
+/*Declaracion metodos de Cuenta*/
 
 Cuenta::Cuenta()
 {
-    numero_cuenta = rand() %  999999 + 100000;
+  numero_cuenta = rand() %  999999 + 100000;
 }
 
 void Cuenta::set_numero_cuenta(int num)
@@ -17,49 +19,121 @@ void Cuenta::set_numero_cuenta(int num)
       {
         throw "Numero de cuenta invalido"; /* evita que el numero de cuenta tenga menos de 6 cifras y mas de 7*/
       }
-      numero_cuenta = num;
+      else
+      {
+        numero_cuenta = num;
+      }
     }
     catch(const char* exception)
     {
-      std::cerr << "Error: " << exception << std::endl;
+      cerr << "Error: " << exception << endl;
     }
     
 }
 
 int Cuenta::get_numero_cuenta()
 {
-    return numero_cuenta;
+  return numero_cuenta;
 }
 
-CajaPesos :: CajaPesos()
+void Cuenta::transferir_pesos(Cuenta *cuenta2,double monto)
 {
-    saldo = 0;
+  try
+  {
+    if(cuentaPesos.get_saldoPesos() < monto)
+    {
+      throw "Saldo insuficiente"; /* evita que se transfiera un monto mayor al saldo disponible*/
+    }
+    else
+    {
+      cuentaPesos.set_saldoPesos(cuentaPesos.get_saldoPesos() - monto);
+      cuenta2->cuentaPesos.set_saldoPesos(cuenta2->cuentaPesos.get_saldoPesos() + monto);
+    }
+    
+    
+  }
+  catch(const char* exception)
+  {
+    cerr << "Error: " << exception << endl;
+  }
 }
 
-void CajaPesos :: set_saldo(double num)
+void Cuenta::transferir_dolares(Cuenta *cuenta2,double monto)
 {
-    saldo = num;
+  try
+  {
+    if(cuentaDolares.get_saldoDolares() < monto)
+    {
+      throw "Saldo insuficiente"; /* evita que se transfiera un monto mayor al saldo disponible*/
+    }
+    else
+    {
+      cuentaDolares.set_saldoDolares(cuentaDolares.get_saldoDolares() - monto);
+      cuenta2->cuentaDolares.set_saldoDolares(cuenta2->cuentaDolares.get_saldoDolares() + monto);
+    }
+    
+  
+  }
+  catch(const char* exception)
+  {
+    cerr << "Error: " << exception << endl;
+  }
 }
 
-double CajaPesos :: get_saldo()
+void Cuenta::set_Pesos(double num)
 {
-    return saldo;
+  cuentaPesos.set_saldoPesos(num);
 }
 
-CajaDolares :: CajaDolares()
+void Cuenta::set_Dolares(double num)
 {
-    saldo = 0;
+  cuentaDolares.set_saldoDolares(num);
 }
 
-void CajaDolares :: set_saldo(double num)
+double Cuenta::get_Pesos()
 {
-    saldo = num;
+  return cuentaPesos.get_saldoPesos();
 }
 
-double CajaDolares :: get_saldo()
+double Cuenta::get_Dolares()
 {
-    return saldo;
+  return cuentaDolares.get_saldoDolares();
 }
+
+/*Declaracion Metodos de Caja en Pesos*/
+CajaPesos::CajaPesos()
+{
+  saldoPesos = 0;
+}
+
+void CajaPesos::set_saldoPesos(double num)
+{
+  saldoPesos = num;
+}
+
+double CajaPesos::get_saldoPesos()
+{
+  return saldoPesos;
+}
+
+
+/*Declaracion Metodos de Caja en Dolares*/
+
+CajaDolares::CajaDolares()
+{
+  saldoDolares = 0;
+}
+
+void CajaDolares::set_saldoDolares(double num)
+{
+  saldoDolares = num;
+}
+
+double CajaDolares::get_saldoDolares()
+{
+  return saldoDolares;
+}
+
 
 
 
