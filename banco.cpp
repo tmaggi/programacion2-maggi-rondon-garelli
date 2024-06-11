@@ -3,6 +3,15 @@
 #include <fstream>
 using namespace std;
 
+Banco::Banco(int cantC, int cantE)
+{
+    cantidadClientes = cantC;
+    Clientes = new Cliente[cantC];
+    cantidadEmpleados = cantE;
+    Empleados = new Empleado[cantE];
+};
+
+
 void Banco::cargaclientes(){
     ifstream fclientes;
     fclientes.open("clientes.txt");
@@ -10,15 +19,15 @@ void Banco::cargaclientes(){
     {
         while (!fclientes.eof())
         {
-        Clientes = new Cliente[1];
-        fclientes >> Clientes.DNI;
-        fclientes >> Clientes.nombre;
-        fclientes >> Clientes.ingreso;
-        fclientes >> Clientes.tipoCliente;
-        fclientes >> Clientes.estado;
-        fclientes >> Clientes.cuenta.get_numero_cuenta();
-        fclientes >> Clientes.cuenta.get_saldoPesos();
-        fclientes >> Clientes.cuenta.get_saldoDolares();
+       
+        fclientes >> Clientes[0].get_DNI();
+        fclientes >> Clientes[0].get_nombre();
+        fclientes >> Clientes[0].get_ingreso();
+        fclientes >> Clientes[0].get_tipoCliente();
+        fclientes >> Clientes[0].get_estado();
+        fclientes >> Clientes[0].cuenta.get_numero_cuenta();
+        fclientes >> Clientes[0].cuenta.get_saldoPesos();
+        fclientes >> Clientes[0].cuenta.get_saldoDolares();
         clientes.push_back(cliente);
         }
     }

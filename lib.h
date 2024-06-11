@@ -24,11 +24,11 @@ public:
 
 class Persona 
 {
-private:
+protected:
   int DNI;
   string nombre;
   int ingreso;
-protected:
+public:
   Persona();
   void set_DNI(int num);
   void set_nombre(std::string arg);
@@ -78,6 +78,7 @@ private:
   int cantidadEmpleados;
   Empleado *Empleados;    
 public:
+  Banco(int cantC,int cantE);
   void cargaclientes();
 };
 
