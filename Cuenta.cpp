@@ -9,6 +9,15 @@ using namespace std;
 Cuenta::Cuenta()
 {
   numero_cuenta = rand() %  999999 + 100000;
+  saldoPesos = 0;
+  saldoDolares = 0;
+}
+
+Cuenta::Cuenta(int num, double saldoPesos, double saldoDolares)
+{
+  numero_cuenta = num;
+  this->saldoPesos = saldoPesos;
+  this->saldoDolares = saldoDolares;
 }
 
 void Cuenta::set_numero_cuenta(int num)

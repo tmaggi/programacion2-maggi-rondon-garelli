@@ -1,15 +1,15 @@
 #include <iostream>
 #include "lib.h"
 #include <fstream>
-#include <string>
+#include <string>"
 using namespace std;
 
-Banco::Banco(int cantC, int cantE)
+Banco::Banco(int cantidadClientes, int cantidadEmpleados)
 {
-    cantidadClientes = cantC;
-    Clientes = new Cliente[cantC];
-    cantidadEmpleados = cantE;
-    Empleados = new Empleado[cantE];
+    cantidadClientes = 0;
+    cantidadEmpleados = 0;
+    Clientes = new Cliente[cantidadClientes];
+    Empleados = new Empleado[cantidadEmpleados];
 };
 
 
@@ -24,7 +24,7 @@ void Banco::cargaclientes(){
         if (fclientes.is_open())
         {
             while (!fclientes.eof())
-            {
+            {   
                 fclientes >> dni;
                 fclientes >> nombre;
                 fclientes >> ingreso;

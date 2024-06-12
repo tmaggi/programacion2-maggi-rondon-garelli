@@ -7,7 +7,16 @@ Cliente::Cliente()
   tipoCliente = "";
   estado = "ACTIVO";
   Cuenta();
+}
 
+Cliente::Cliente(int DNI, string nombre, int ingreso, string tipoCliente, string estado,int num ,double saldoPesos, double saldoDolares)
+{
+  set_DNI(DNI);
+  set_nombre(nombre);
+  set_ingreso(ingreso);
+  set_tipoCliente(tipoCliente);
+  set_estado(estado);
+  Cuenta(num ,saldoPesos, saldoDolares);
 }
 
 void Cliente::set_tipoCliente(std::string tipo)

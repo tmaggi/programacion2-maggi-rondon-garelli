@@ -14,6 +14,7 @@ private:
   double saldoDolares;
 public:
   Cuenta();
+  Cuenta(int num, double saldoPesos, double saldoDolares);
   void set_numero_cuenta(int num);
   int get_numero_cuenta();
   void set_saldoPesos(double num);
@@ -49,6 +50,7 @@ private:
   Cuenta cuenta;
 public:
   Cliente();
+  Cliente(int DNI, string nombre, int ingreso, string tipoCliente, string estado,int num ,double saldoPesos, double saldoDolares);
   void set_tipoCliente(string tipo);
   void set_estado(string est);
   string get_tipoCliente();
@@ -58,6 +60,7 @@ public:
   void retirar_pesos(double monto);
   void retirar_dolares(double monto);
   Cuenta* get_Cuenta();
+  
 };
 
 
@@ -79,7 +82,7 @@ private:
   int cantidadEmpleados;
   Empleado *Empleados;    
 public:
-  Banco(int cantC,int cantE);
+  Banco(int cantidadClientes, int cantidadEmpleados);
   void cargaclientes();
 };
 
