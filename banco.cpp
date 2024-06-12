@@ -131,8 +131,8 @@ int Banco::get_cantidadClientes(){
     return cantidadClientes;
 }
 
-Cliente* Banco::get_Clientes(){
-    return Clientes;
+Cliente Banco::get_Cliente(int pos){
+    return Clientes[pos];
 }
 
 int Banco::calcularClientes(){

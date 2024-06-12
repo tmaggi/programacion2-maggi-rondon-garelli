@@ -93,7 +93,7 @@ public:
   void listadoClientes();
   void detalleCliente(int numCuenta);
   int get_cantidadClientes();
-  Cliente* get_Clientes();
+  Cliente get_Cliente(int pos);
   void deposito(double monto,double numero,char moneda);
   void extraer(double monto,double numero,char moneda);
   void agregarCliente(string nom,int dni,string lvl);
@@ -111,5 +111,5 @@ class sistema{
     void transaccionPorMes(int M);
     void transaccionPorAnio(int A);
     void mostrarTransacciones();
-    void guardarClientes(Banco ucc);
+    void guardarClientes(Banco *UCC);
 };

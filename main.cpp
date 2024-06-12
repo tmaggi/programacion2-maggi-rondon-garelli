@@ -262,10 +262,11 @@ int main(){
   string variable = "si";
   try
   {
-    Banco bancoUCC(CantClientes());
+    Banco bancoUCC(CantClientes()),*auxBanco;
     sistema sistemaUCC;
     bancoUCC.cargaclientes();
-
+    auxBanco = &bancoUCC;
+    sistemaUCC.guardarClientes(auxBanco);
     while (variable == "si")
     {
       cout << "ingrese la operacion que desea realizar: " << endl;
@@ -285,11 +286,11 @@ int main(){
       cout<<"si desea seguir operando, ingrese si"<<endl;
       cin >> variable;
     }
-    sistemaUCC.guardarClientes(bancoUCC);
+    
   }
-  catch(bad_alloc&)
+  catch(bad_alloc& exception)
   {
-    cerr << "error de memoria";
+    cerr << "Error de memoria"<< endl;
   }
   catch(...)
   {
