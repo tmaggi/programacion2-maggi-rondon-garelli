@@ -5,48 +5,91 @@
 #include <limits>
 using namespace std;
 
-int main()
-{
-  int cantC, cantE,numcuenta;
-  ifstream fclientes("fclientes.txt");
-  string lien;
-  getline(fclientes, lien);
-  fclientes >> cantC;
-  fclientes >> cantE;
+void detalleCliente(Banco bancoUCC){
+  int numcuenta;
+  cout << "Ingrese el numero de cuenta del cliente: ";
+  cin >> numcuenta;
+  bancoUCC.detalleCliente(numcuenta);
+}
+
+void listadoClientes(Banco bancoUCC){
+  bancoUCC.listadoClientes();
+}
+
+void transaccionesCliente(sistema sistemaUCC){
+  int numcuenta;
+  cout << "Ingrese el numero de cuenta del cliente: ";
+  cin >> numcuenta;
+  sistemaUCC.transaccionPorCliente(numcuenta);
+}
+
+void transaccionesMes(sistema sistemaUCC){
+  int mes;
+  cout << "Ingrese el mes en formato numerico(mm): ";
+  cin >> mes;
+  sistemaUCC.transaccionPorMes(mes);
+}
+
+void transaccionesAnio(sistema sistemaUCC){
+  int A;
+  cout << "Ingrese el anio en formato numerico(yyyy): ";
+  cin >> A;
+  sistemaUCC.transaccionPorAnio(A);
+}
+
+void todasTransacciones(sistema sistemaUCC){
+  sistemaUCC.mostrarTransacciones();
+}
+
+
+void Menu(int operacion,Banco bancoUCC,sistema sistemaUCC){
+  switch (operacion)
+  {
+  case 1:
+    detalleCliente(bancoUCC);
+    break;
+  case 2:
+    listadoClientes(bancoUCC);
+    break;
+  case 3:
+    transaccionesCliente(sistemaUCC);
+    break;
+  case 4:
+    transaccionesMes(sistemaUCC);
+    break;
+  case 5:
+    transaccionesAnio(sistemaUCC);
+    break;
+  case 6:
+    todasTransacciones(sistemaUCC);
+    break;
+  default:
+    break;
+  }
+
+};
+
+
+
+
+int main(){
+  int operacion;
+  Banco bancoUCC;
+  sistema sistemaUCC;
   
-  Banco banco(cantC, cantE);
-  banco.cargaclientes();
-  cout << "clientes cargados" << endl;
-  cout << "--------------------------------------------------------------------------------------" << endl;
-  cout << "Bienvenido al sistema de Banco" << endl;
-  cout << "si desea abrir una nueva cuenta presione 1" << endl;
-  cout << "deseea realizar una accion con una cuenta existente presione 2" << endl;
-  cout << "--------------------------------------------------------------------------------------" << endl;
-  int opcion;
-  while (cout << "Ingrese una opcion" && !(cin >> opcion)) {
-    cin.clear(); 
-    cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
-    cout << "ingreso invalido; porfavor ingrese una opcion valida.\n";
-  }
-  if (opcion == 1)
-  {
-    
-  }
-  else if (opcion == 2)
-  {
-    
-  }
-  else 
-  {
-    cout << "opcion invalida" << endl;
-  }
-  
-  while (cout << "Enter a number" && !(cin >> numcuenta)) {
-    cin.clear(); 
-    cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
-    cout << "ingreso invalido; porfavor ingrese un numero de cuenta.\n";
-  return 0;
-  }
+
+  cout << "ingrese la operacion que desea realizar: " << endl;
+  cout << "(1) Ver detalle de un cliente ingresando su numero de cuenta" << endl;
+  cout << "(2) Ver listado de todos los clientes del banco" << endl;
+  cout << "(3) Ver Listado de transacciones de un cliente" << endl;
+  cout << "(4) Ver listado de transacciones de un mes" << endl;
+  cout << "(5) ver listado de transacciones de un anio" << endl;
+  cout << "(6) Ver listado de todas las transacciones" << endl;
+  cin >> operacion;
+  Menu(operacion,bancoUCC,sistemaUCC);
+
 
   return 0;
 }
+
+

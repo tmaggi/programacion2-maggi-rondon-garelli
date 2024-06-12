@@ -12,15 +12,17 @@ private:
   long int numero_cuenta;
   double saldoPesos;
   double saldoDolares;
+  int limite;
 public:
   Cuenta();
-  Cuenta(int num, double saldoPesos, double saldoDolares);
   void set_numero_cuenta(int num);
   int get_numero_cuenta();
   void set_saldoPesos(double num);
   double get_saldoPesos();
   void set_saldoDolares(double num);
   double get_saldoDolares(); 
+  void set_limite(int num);
+  int get_limite();
 };
 
 class Persona 
@@ -44,22 +46,20 @@ public:
 class Cliente: public Persona 
 {
 private:
-
-  string tipoCliente;
   string estado;
+  string nivel;
   Cuenta cuenta;
 public:
   Cliente();
-  Cliente(int DNI, string nombre, int ingreso, string tipoCliente, string estado,int num ,double saldoPesos, double saldoDolares);
-  void set_tipoCliente(string tipo);
   void set_estado(string est);
-  string get_tipoCliente();
   string get_estado();
   void depositar_dolares(double monto);
   void depositar_pesos(double monto);
   void retirar_pesos(double monto);
   void retirar_dolares(double monto);
   Cuenta* get_Cuenta();
+  void set_nivel(string niv);
+  string get_nivel();
   
 };
 
@@ -79,11 +79,16 @@ class Banco
 private:
   int cantidadClientes;
   Cliente *Clientes;
-  int cantidadEmpleados;
-  Empleado *Empleados;    
+  int calcularClientes();
 public:
-  Banco(int cantidadClientes, int cantidadEmpleados);
+  Banco();
+  Banco(int cantidadClientes);
   void cargaclientes();
+  void listadoClientes();
+  void detalleCliente(int numCuenta);
+  int get_cantidadClientes();
+  Cliente* get_Clientes();
+  
 };
 
 class sistema{
@@ -93,4 +98,9 @@ class sistema{
   public:
     sistema();
     void guardartransaccion(double num,int numcuenta,char divisa);
+    void transaccionPorCliente(int numcuenta);
+    void transaccionPorMes(int M);
+    void transaccionPorAnio(int A);
+    void mostrarTransacciones();
+    void guardarClientes(Banco *ucc);
 };

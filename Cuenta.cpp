@@ -11,14 +11,9 @@ Cuenta::Cuenta()
   numero_cuenta = rand() %  999999 + 100000;
   saldoPesos = 0;
   saldoDolares = 0;
+  limite = 0;
 }
 
-Cuenta::Cuenta(int num, double saldoPesos, double saldoDolares)
-{
-  numero_cuenta = num;
-  this->saldoPesos = saldoPesos;
-  this->saldoDolares = saldoDolares;
-}
 
 void Cuenta::set_numero_cuenta(int num)
 {
@@ -55,10 +50,6 @@ double Cuenta::get_saldoPesos()
   return saldoPesos;
 }
 
-
-/*Declaracion Metodos de Caja en Dolares*/
-
-
 void Cuenta::set_saldoDolares(double num)
 {
   saldoDolares = num;
@@ -69,6 +60,14 @@ double Cuenta::get_saldoDolares()
   return saldoDolares;
 }
 
+void Cuenta::set_limite(int num)
+{
+  limite = num;
+}
 
+int Cuenta::get_limite()
+{
+  return limite;
+}
 
 

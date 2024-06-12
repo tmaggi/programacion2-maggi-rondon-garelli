@@ -4,35 +4,18 @@ using namespace std;
 
 Cliente::Cliente()
 {
-  tipoCliente = "";
   estado = "ACTIVO";
   Cuenta();
+  nivel = "PLATA";
 }
 
-Cliente::Cliente(int DNI, string nombre, int ingreso, string tipoCliente, string estado,int num ,double saldoPesos, double saldoDolares)
-{
-  set_DNI(DNI);
-  set_nombre(nombre);
-  set_ingreso(ingreso);
-  set_tipoCliente(tipoCliente);
-  set_estado(estado);
-  Cuenta(num ,saldoPesos, saldoDolares);
-}
 
-void Cliente::set_tipoCliente(std::string tipo)
-{
-  tipoCliente = tipo;
-}
 
 void Cliente::set_estado(std::string est)
 {
   estado = est;
 }
 
-string Cliente::get_tipoCliente()
-{
-  return tipoCliente;
-}
 
 string Cliente::get_estado()
 {
@@ -118,6 +101,41 @@ void Cliente::retirar_dolares(double monto)
 Cuenta* Cliente::get_Cuenta()
 {
   return &cuenta;
+}
+
+void Cliente::set_nivel(string niv)
+{
+  try
+  {
+    if (niv == "PLATA")
+    {
+      cuenta.set_limite(0);
+      nivel = niv;
+    }
+    else if (niv == "ORO")
+    {
+      cuenta.set_limite(250000);
+      nivel = niv;
+    }
+    else if (niv == "PLATINO")
+    {
+      cuenta.set_limite(500000);
+      nivel = niv;
+    }
+    else
+    {
+      throw "Nivel invalido";
+    }
+  } 
+  catch(const char* exception)
+  {
+    cerr << "Error: " << exception << endl;
+  }
+}
+
+string Cliente::get_nivel()
+{
+  return nivel;
 }
 
 
