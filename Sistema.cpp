@@ -230,6 +230,10 @@ void sistema::guardarClientes(Banco *ucc){
   {
     cerr << "Error: " << exception << endl;
   }
+  catch(bad_alloc&)
+  {
+    cerr << "Error de memoria " << endl;
+  }
   fclientes.close();
 
 }

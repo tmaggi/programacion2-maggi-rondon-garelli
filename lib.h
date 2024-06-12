@@ -66,6 +66,7 @@ public:
   void set_numcuenta(int numero_cuenta);
   void set_saldo_Pesos(int n);
   void set_saldoDolares(int n);
+  void gastarlimite(double num);
 };
 
 
@@ -93,8 +94,10 @@ public:
   void detalleCliente(int numCuenta);
   int get_cantidadClientes();
   Cliente* get_Clientes();
-  void deposito(double,double,string);
-  void extraer(double,double,string);
+  void deposito(double monto,double numero,char moneda);
+  void extraer(double monto,double numero,char moneda);
+  void agregarCliente(string nom,int dni,string lvl);
+  void credito(int numC,double monto);
 };
 
 class sistema{

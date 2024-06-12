@@ -5,6 +5,33 @@
 #include <limits>
 using namespace std;
 
+int CantClientes(){
+  ifstream fich("fclientes.txt");
+  string aux;
+  int cantidad = 0;
+  try
+  {
+    if (fich.is_open())
+    {
+      fich >> aux;
+      fich >> aux;
+      fich >> aux;
+      fich >> cantidad;
+    }
+    else
+    {
+      throw "no se pudo abrir el archivo";
+    }
+  }
+  catch(const char* exception)
+  {
+    cerr << "Error: " << exception << endl;
+  }
+  fich.close();
+  return cantidad;
+
+}
+
 void detalleCliente(Banco bancoUCC){
   int numcuenta;
   cout << "Ingrese el numero de cuenta del cliente: ";
@@ -46,30 +73,151 @@ void todasTransacciones(sistema sistemaUCC){
   sistemaUCC.mostrarTransacciones();
   system("pause");
 }
+
 void depositar(Banco bancoUCC){
   double monto,numero;
-  string moneda;
-  cout<<"ingrese la moneda (p)pesos (d)dolares"<<endl;
-  cin>>moneda;
-  cout<<"ingrese el nro de cuenta en el que desea depositar"<<endl;
-  cin>>numero;
-  cout<<"ingrese el monto a depositar"<<endl;
-  cin>>monto;
-  bancoUCC.deposito(monto,numero,moneda);
+  char moneda;
+  try
+  {
+    cout<<"ingrese la moneda (P)pesos (D)dolares"<<endl;
+    cin>>moneda;
+    if (!cin.fail() || (moneda == 'P' || moneda == 'D') || (moneda == 'p' || moneda == 'd'))
+    {
+      cout<<"ingrese el nro de cuenta en el que desea depositar"<<endl;
+      cin>>numero;
+      if (!cin.fail())
+      {
+        cout<<"ingrese el monto a extraer"<<endl;
+        cin>>monto;
+        if (!cin.fail())
+        {
+        bancoUCC.deposito(monto,numero,moneda);
+        }
+        else
+        {
+          throw "Dato no valido";
+        }
+      }
+      else
+      {
+        throw "Dato no valido";
+      }
+    }
+    else
+    {
+      throw "Dato no valido";
+    }
+  }
+  catch(const char* exception)
+  {
+    cerr << "Error:" << exception  << endl;
+  }
+
+  
+  
 }
 void extraccion(Banco bancoUCC){
   double monto,numero;
-  string moneda;
-  cout<<"ingrese la moneda (p)pesos (d)dolares"<<endl;
-  cin>>moneda;
-  cout<<"ingrese el nro de cuenta en el que desea extraer"<<endl;
-  cin>>numero;
-  cout<<"ingrese el monto a extraer"<<endl;
-  cin>>monto;
-  bancoUCC.extraer(monto,numero,moneda);
+  char moneda;
+  try
+  {
+    cout<<"ingrese la moneda (P)pesos (D)dolares"<<endl;
+    cin>>moneda;
+    if (!cin.fail() || (moneda == 'P' || moneda == 'D') || (moneda == 'p' || moneda == 'd'))
+    {
+      cout<<"ingrese el nro de cuenta en el que desea extraer"<<endl;
+      cin>>numero;
+      if (!cin.fail())
+      {
+        cout<<"ingrese el monto a extraer"<<endl;
+        cin>>monto;
+        if (!cin.fail())
+        {
+        bancoUCC.extraer(monto,numero,moneda);
+        }
+        else
+        {
+          throw "Dato no valido";
+        }
+      }
+      else
+      {
+        throw "Dato no valido";
+      }
+    }
+    else
+    {
+      throw "Dato no valido";
+    }
+  }
+  catch(const char* exception)
+  {
+    cerr << "Error:" << exception  << endl;
+  }
+  
+  
+  
 }
-void credito(Banco BancoUCC){
 
+void credito(Banco BancoUCC){
+  double monto,numero;
+  
+  try{
+    cout << "Ingrese el numero de cuenta del cliente: ";
+    cin >> numero;
+    if (!cin.fail())
+    {
+      cout << "Ingrese el monto a usar de credito: ";
+      cin >> monto;
+      if (!cin.fail())
+      {
+        BancoUCC.credito(numero,monto);
+      }
+      else
+      {
+        throw "Dato no valido";
+      }
+    }
+    else
+    {
+      throw "Dato no valido";
+    }
+  }
+  catch(const char* exception)
+  {
+    cerr << "Error:" << exception  << endl;
+  }
+  
+  
+}
+
+void agregarCliente(Banco bancoUCC){
+  string nom,lvl;
+  int dni;
+  try
+  {
+    
+    cout << "Ingrese el dni del cliente: ";
+    cin >> dni;
+    if (!cin.fail())
+    {
+      cout << "Ingrese el nombre del cliente: ";
+      cin >> nom;
+      cout << "Ingrese el nivel del cliente: ";
+      cin >> lvl;
+      bancoUCC.agregarCliente(nom,dni,lvl);
+    }
+    else
+    {
+      throw "DNI no valido";
+    }
+    
+  }
+  catch(const char* exception)
+  {
+    cerr << "Error:" << exception  << endl;
+  }
+  
   
 }
 
@@ -102,6 +250,10 @@ void Menu(int operacion,Banco bancoUCC,sistema sistemaUCC){
     break;
   case 9:
     credito(bancoUCC);
+    break;
+  case 10:
+    agregarCliente(bancoUCC);
+    break;
   default:
     break;
   }
@@ -113,32 +265,45 @@ void Menu(int operacion,Banco bancoUCC,sistema sistemaUCC){
 
 int main(){
   int operacion;
-  int b;
   string variable = "si";
-  
-  Banco bancoUCC(3);
-  sistema sistemaUCC;
-  bancoUCC.cargaclientes();
-
-  while (variable == "si")
+  try
   {
-    cout << "ingrese la operacion que desea realizar: " << endl;
-    cout << "(1) Ver detalle de un cliente ingresando su numero de cuenta" << endl;
-    cout << "(2) Ver listado de todos los clientes del banco" << endl;
-    cout << "(3) Ver Listado de transacciones de un cliente" << endl;
-    cout << "(4) Ver listado de transacciones de un mes" << endl;
-    cout << "(5) ver listado de transacciones de un anio" << endl;
-    cout << "(6) Ver listado de todas las transacciones" << endl;
-    cout << "(7) Depositar dinero" << endl;
-    cout<<  "(8) Extraer dinero" << endl;
-    cout<<  "(9) Pagar en credito" << endl;
-    cin >> operacion;
+    Banco bancoUCC(CantClientes());
+    sistema sistemaUCC;
+    bancoUCC.cargaclientes();
 
-    Menu(operacion,bancoUCC,sistemaUCC);
-    cout<<"si desea seguir operando, ingrese si"<<endl;
-    cin >> variable;
+    while (variable == "si")
+    {
+      cout << "ingrese la operacion que desea realizar: " << endl;
+      cout << "(1) Ver detalle de un cliente ingresando su numero de cuenta" << endl;
+      cout << "(2) Ver listado de todos los clientes del banco" << endl;
+      cout << "(3) Ver Listado de transacciones de un cliente" << endl;
+      cout << "(4) Ver listado de transacciones de un mes" << endl;
+      cout << "(5) ver listado de transacciones de un anio" << endl;
+      cout << "(6) Ver listado de todas las transacciones" << endl;
+      cout << "(7) Depositar dinero" << endl;
+      cout<<  "(8) Extraer dinero" << endl;
+      cout<<  "(9) Pagar en credito" << endl;
+      cout<<  "(10) Agregar cliente" << endl;
+      cin >> operacion;
+
+      Menu(operacion,bancoUCC,sistemaUCC);
+      cout<<"si desea seguir operando, ingrese si"<<endl;
+      cin >> variable;
+    }
+  }
+  catch(bad_alloc&)
+  {
+    cerr << "error de memoria";
+  }
+  catch(...)
+  {
+    cerr << "ERROR" << endl;
   }
   
+    
+
+  system("pause");
   return 0;
 }
 

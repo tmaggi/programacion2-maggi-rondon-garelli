@@ -159,4 +159,20 @@ string Cliente::get_nivel()
   return nivel;
 }
 
-
+void Cliente::gastarlimite(double num){
+  try
+  {
+    if (num > cuenta.get_limite() || num < 0)
+    {
+      throw "Limite excedido o monto invalido";
+    }
+    else
+    {
+      cuenta.set_limite(cuenta.get_limite() - num);
+    }
+  }
+  catch(const char* exception)
+  {
+    cerr << "Error: " << exception << endl;
+  }
+}
