@@ -1,6 +1,7 @@
 #include <iostream>
 #include "lib.h"
 #include <fstream>
+#include <string>
 using namespace std;
 
 Banco::Banco(int cantC, int cantE)
@@ -15,24 +16,44 @@ Banco::Banco(int cantC, int cantE)
 void Banco::cargaclientes(){
     ifstream fclientes;
     fclientes.open("clientes.txt");
-    if (fclientes.is_open())
+    string dni, nombre, tipoCliente, estado;
+    double ingreso, numero_cuenta, saldoPesos, saldoDolares;
+    int i = 0;
+    try
     {
-        while (!fclientes.eof())
+        if (fclientes.is_open())
         {
-       
-        fclientes >> Clientes[0].get_DNI();
-        fclientes >> Clientes[0].get_nombre();
-        fclientes >> Clientes[0].get_ingreso();
-        fclientes >> Clientes[0].get_tipoCliente();
-        fclientes >> Clientes[0].get_estado();
-        fclientes >> Clientes[0].cuenta.get_numero_cuenta();
-        fclientes >> Clientes[0].cuenta.get_saldoPesos();
-        fclientes >> Clientes[0].cuenta.get_saldoDolares();
-        clientes.push_back(cliente);
+            while (!fclientes.eof())
+            {
+                fclientes >> dni;
+                fclientes >> nombre;
+                fclientes >> ingreso;
+                fclientes >> tipoCliente;
+                fclientes >> estado;
+                fclientes >> numero_cuenta;
+                fclientes >> saldoPesos;
+                fclientes >> saldoDolares;
+                
+                Clientes[i].set_DNI(stoi(dni));
+                Clientes[i].set_nombre(nombre);
+                Clientes[i].set_ingreso(ingreso);
+                Clientes[i].set_tipoCliente(tipoCliente);
+                Clientes[i].set_estado(estado);
+                Clientes[i].get_Cuenta()->set_numero_cuenta(numero_cuenta);
+                Clientes[i].get_Cuenta()->set_saldoPesos(saldoPesos);
+                Clientes[i].get_Cuenta()->set_saldoDolares(saldoDolares);
+                i++;
+            }
+        }
+        else
+        {
+           throw "No se pudo abrir el archivo";
         }
     }
-    else
+    catch(const char* exception)
     {
-        cout << "No se pudo abrir el archivo" << endl;
+        cerr << "Error: " << exception << endl;
     }
+    
+        
 }

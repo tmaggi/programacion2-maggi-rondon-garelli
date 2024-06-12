@@ -4,22 +4,40 @@
 #include <fstream>
 using namespace std;
 
+sistema::sistema(){}
+
+void sistema::setearfecha(){
+  time_t t = time(0);
+  tm* ahora = localtime(&t);
+  anio = ahora->tm_year + 1900;
+  mes = ahora->tm_mon + 1;
+  dia = ahora->tm_mday;
+}
+  
+
 void sistema::guardartransaccion(double num,int numtransaccion,char divisa){
   ofstream ftransaccion;
-  if (ftransaccion.is_open())
+  try
   {
-    dia=0;
-    mes=0;
-    ano=0;
-    /*ctime setea la fecha*/
-    ftransaccion << dia << " / " << mes << " / " << ano << "\t";
-    ftransaccion << numtransaccion << "\t";
-    ftransaccion << divisa << "\t";
-    ftransaccion << num << endl;
+    if (ftransaccion.is_open())
+    {
+      
+      setearfecha();
+      ftransaccion << dia << " / " << mes << " / " << anio << "\t";
+      ftransaccion << numtransaccion << "\t";
+      ftransaccion << divisa << "\t";
+      ftransaccion << num << endl;
+    }
+    else{
+      throw "no se pudo abrir el archivo";
+    }
   }
-  else{
-    cout << "no se pudo abrir el archivo" << endl;
+  catch(const char* exception)
+  {
+    cerr << "Error: " << exception << endl;
   }
+  
+  
 }
 
 

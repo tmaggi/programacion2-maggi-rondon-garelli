@@ -106,3 +106,9 @@ void Cliente::retirar_dolares(double monto)
   }
 }
 
+Cuenta* Cliente::get_Cuenta()
+{
+  return &cuenta;
+}
+
+

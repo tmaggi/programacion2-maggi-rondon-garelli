@@ -57,6 +57,7 @@ public:
   void depositar_pesos(double monto);
   void retirar_pesos(double monto);
   void retirar_dolares(double monto);
+  Cuenta* get_Cuenta();
 };
 
 
@@ -84,7 +85,8 @@ public:
 
 class sistema{
   private:
-    int ano,mes,dia;
+    int anio,mes,dia;
+    void setearfecha();
   public:
     sistema();
     void guardartransaccion(double num,int numcuenta,char divisa);
