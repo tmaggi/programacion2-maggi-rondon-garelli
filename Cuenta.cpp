@@ -70,4 +70,13 @@ int Cuenta::get_limite()
   return limite;
 }
 
-
+void Cuenta::gastarlimite(long double num){
+  if (limite > num)
+  {
+    limite -= num;
+  }
+  else{
+    cout << "saldo insuficiente" << endl;
+  }
+  
+}

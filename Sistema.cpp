@@ -17,7 +17,7 @@ void sistema::setearfecha(){
   
 
 void sistema::guardartransaccion(double num,int numcuenta,char divisa){
-  ofstream ftransaccion;
+  ofstream ftransaccion("fTransacciones.txt");
   try
   {
     if (ftransaccion.is_open())
@@ -36,19 +36,24 @@ void sistema::guardartransaccion(double num,int numcuenta,char divisa){
   {
     cerr << "Error: " << exception << endl;
   }
+  ftransaccion.close();
 }
 
 void sistema::transaccionPorCliente(int numcuenta){
-  ifstream ftransaccion;
-  ftransaccion.open("fTransacciones.txt");
+  ifstream ftransaccion("fTransacciones.txt");
   string linea;
   bool encontrado = false;
   try
   {
     if (ftransaccion.is_open())
     {
-      while (!ftransaccion.eof())
+      while (ftransaccion)
       {
+        if (ftransaccion.eof())
+        {
+          break;
+        }
+        
         getline(ftransaccion, linea);
         if (linea.find(to_string(numcuenta)) != string::npos)
         {
@@ -70,19 +75,24 @@ void sistema::transaccionPorCliente(int numcuenta){
   {
     cerr << "Error: " << exception << endl;
   }
+  ftransaccion.close();
 }
 
 void sistema::transaccionPorAnio(int A){
-  ifstream ftransaccion;
-  ftransaccion.open("fTransacciones.txt");
+  ifstream ftransaccion("fTransacciones.txt");
   string linea;
   bool encontrado = false;
   try
   {
     if (ftransaccion.is_open())
     {
-      while (!ftransaccion.eof())
+      while (ftransaccion)
       {
+        if (ftransaccion.eof())
+        {
+          break;
+        }
+        
         getline(ftransaccion, linea);
         if (linea.find(to_string(A)) != string::npos)
         {
@@ -104,30 +114,46 @@ void sistema::transaccionPorAnio(int A){
   {
     cerr << "Error: " << exception << endl;
   }
+  ftransaccion.close();
 }
 
 void sistema::transaccionPorMes(int M){
-  ifstream ftransaccion;
-  ftransaccion.open("fTransacciones.txt");
-  string linea;
+  ifstream ftransaccion("fTransacciones.txt");
+  string linea,aux,dia;
   bool encontrado = false;
   setearfecha();
   try
   {
     if (ftransaccion.is_open())
     {
-      while (!ftransaccion.eof())
+      getline(ftransaccion,linea);
+      cout << linea<< endl;
+      while (ftransaccion)
       {
-        getline(ftransaccion, linea);
-        if ((linea.find(to_string(M)) != string::npos) && (linea.find(to_string(anio)) != string::npos))
+        if (ftransaccion.eof())
         {
-          cout << linea << endl;
+          break;
+        }
+        ftransaccion >>dia;
+        ftransaccion >> linea;
+        aux = "0" + to_string(M);
+        if (linea == aux )
+        {
+          cout << dia << "\t"; 
+          cout << linea << "\t";
+          for (int i = 0; i < 4; i++)
+          {
+            ftransaccion >> linea;
+            cout << linea << "\t";
+          }
+          cout << endl;
           encontrado = true;
         }
+        
       }
       if (!encontrado)
       {
-        throw "No hubo transacciones en ese año";
+        throw "No hubo transacciones en ese mes";
       }
     }
     else
@@ -139,19 +165,24 @@ void sistema::transaccionPorMes(int M){
   {
     cerr << "Error: " << exception << endl;
   }
+  ftransaccion.close();
 }
 
 void sistema::mostrarTransacciones(){
-  ifstream ftransaccion;
-  ftransaccion.open("fTransacciones.txt");
+  ifstream ftransaccion("fTransacciones.txt");
   string linea;
   try
   {
     if (ftransaccion.is_open())
     {
       ftransaccion.ignore(1000, '\n');
-      while (!ftransaccion.eof())
+      while (ftransaccion)
       {
+        if (ftransaccion.eof())
+        {
+          break;
+        }
+        
         getline(ftransaccion, linea);
         cout << linea << endl;
       }
@@ -165,11 +196,11 @@ void sistema::mostrarTransacciones(){
   {
     cerr << "Error: " << exception << endl;
   }
+  ftransaccion.close();
 }
 
 void sistema::guardarClientes(Banco *ucc){
-  ofstream fclientes;
-  fclientes.open("clientes.txt");
+  ofstream fclientes("fclientes.txt");
   try
   {
     
@@ -184,9 +215,9 @@ void sistema::guardarClientes(Banco *ucc){
         fclientes << ucc->get_Clientes()[i].get_ingreso() << "\t";
         fclientes << ucc->get_Clientes()[i].get_nivel() << "\t" << "\t";
         fclientes << ucc->get_Clientes()[i].get_estado() << "\t" << "\t";
-        fclientes << ucc->get_Clientes()[i].get_Cuenta()->get_numero_cuenta() << "\t" << "\t";
-        fclientes << ucc->get_Clientes()[i].get_Cuenta()->get_saldoPesos() << "\t" << "\t";
-        fclientes << ucc->get_Clientes()[i].get_Cuenta()->get_saldoDolares() << endl;
+        fclientes << ucc->get_Clientes()[i].get_numCuenta() << "\t" << "\t";
+        fclientes << ucc->get_Clientes()[i].get_saldoPesos() << "\t" << "\t";
+        fclientes << ucc->get_Clientes()[i].get_saldoDolares() << endl;
       }
     }
     else
@@ -199,7 +230,7 @@ void sistema::guardarClientes(Banco *ucc){
   {
     cerr << "Error: " << exception << endl;
   }
-  
+  fclientes.close();
 
 }
 

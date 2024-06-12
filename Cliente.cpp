@@ -98,9 +98,30 @@ void Cliente::retirar_dolares(double monto)
   }
 }
 
-Cuenta* Cliente::get_Cuenta()
+int Cliente::get_numCuenta()
 {
-  return &cuenta;
+  return cuenta.get_numero_cuenta();
+}
+
+long double Cliente::get_saldoPesos(){
+  return cuenta.get_saldoPesos();
+}
+
+long double Cliente::get_saldoDolares(){
+  return cuenta.get_saldoDolares();
+}
+
+void Cliente::set_numcuenta(int numero_cuenta){
+  cuenta.set_numero_cuenta(numero_cuenta);
+
+}
+
+void Cliente::set_saldo_Pesos(int n){
+  cuenta.set_saldoPesos(n);
+}
+
+void Cliente::set_saldoDolares(int n){
+  cuenta.set_saldoDolares(n);
 }
 
 void Cliente::set_nivel(string niv)

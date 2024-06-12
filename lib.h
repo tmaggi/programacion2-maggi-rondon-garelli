@@ -23,6 +23,7 @@ public:
   double get_saldoDolares(); 
   void set_limite(int num);
   int get_limite();
+  void gastarlimite(long double);
 };
 
 class Persona 
@@ -57,10 +58,14 @@ public:
   void depositar_pesos(double monto);
   void retirar_pesos(double monto);
   void retirar_dolares(double monto);
-  Cuenta* get_Cuenta();
+  int get_numCuenta();
+  long double get_saldoPesos();
+  long double get_saldoDolares();
   void set_nivel(string niv);
   string get_nivel();
-  
+  void set_numcuenta(int numero_cuenta);
+  void set_saldo_Pesos(int n);
+  void set_saldoDolares(int n);
 };
 
 
@@ -88,7 +93,8 @@ public:
   void detalleCliente(int numCuenta);
   int get_cantidadClientes();
   Cliente* get_Clientes();
-  
+  void deposito(double,double,string);
+  void extraer(double,double,string);
 };
 
 class sistema{
