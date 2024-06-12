@@ -37,12 +37,10 @@ void detalleCliente(Banco bancoUCC){
   cout << "Ingrese el numero de cuenta del cliente: ";
   cin >> numcuenta;
   bancoUCC.detalleCliente(numcuenta);
-  system("pause");
 }
 
 void listadoClientes(Banco bancoUCC){
   bancoUCC.listadoClientes();
-  system("pause");
 }
 
 void transaccionesCliente(sistema sistemaUCC){
@@ -50,7 +48,6 @@ void transaccionesCliente(sistema sistemaUCC){
   cout << "Ingrese el numero de cuenta del cliente: ";
   cin >> numcuenta;
   sistemaUCC.transaccionPorCliente(numcuenta);
-  system("pause");
 }
 
 void transaccionesMes(sistema sistemaUCC){
@@ -58,7 +55,6 @@ void transaccionesMes(sistema sistemaUCC){
   cout << "Ingrese el mes en formato numerico(mm): ";
   cin >> mes;
   sistemaUCC.transaccionPorMes(mes);
-  system("pause");
 }
 
 void transaccionesAnio(sistema sistemaUCC){
@@ -66,12 +62,10 @@ void transaccionesAnio(sistema sistemaUCC){
   cout << "Ingrese el anio en formato numerico(yyyy): ";
   cin >> A;
   sistemaUCC.transaccionPorAnio(A);
-  system("pause");
 }
 
 void todasTransacciones(sistema sistemaUCC){
   sistemaUCC.mostrarTransacciones();
-  system("pause");
 }
 
 void depositar(Banco bancoUCC){
@@ -87,7 +81,7 @@ void depositar(Banco bancoUCC){
       cin>>numero;
       if (!cin.fail())
       {
-        cout<<"ingrese el monto a extraer"<<endl;
+        cout<<"ingrese el monto a depositar"<<endl;
         cin>>monto;
         if (!cin.fail())
         {
@@ -291,6 +285,7 @@ int main(){
       cout<<"si desea seguir operando, ingrese si"<<endl;
       cin >> variable;
     }
+    sistemaUCC.guardarClientes(bancoUCC);
   }
   catch(bad_alloc&)
   {

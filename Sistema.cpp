@@ -199,25 +199,25 @@ void sistema::mostrarTransacciones(){
   ftransaccion.close();
 }
 
-void sistema::guardarClientes(Banco *ucc){
+void sistema::guardarClientes(Banco ucc){
   ofstream fclientes("fclientes.txt");
   try
   {
     
     if (fclientes.is_open())
     {
-      fclientes << "Cantidad de Clientes: " << ucc->get_cantidadClientes() << endl;
+      fclientes << "Cantidad de Clientes: " << ucc.get_cantidadClientes() << endl;
       fclientes << "DNI" << "\t\t" << "Nombre" << "\t\t" << "Ingreso" << "\t\t" << "Nivel" << "\t\t" << "Estado" << "\t\t" << "Numero de Cuenta" << "\t\t" << "Saldo Pesos" << "\t\t" << "Saldo Dolares" << endl;
-      for (int i = 0; i < ucc->get_cantidadClientes(); i++)
+      for (int i = 0; i < ucc.get_cantidadClientes(); i++)
       {
-        fclientes << ucc->get_Clientes()[i].get_DNI() << "\t";
-        fclientes << ucc->get_Clientes()[i].get_nombre() << "\t";
-        fclientes << ucc->get_Clientes()[i].get_ingreso() << "\t";
-        fclientes << ucc->get_Clientes()[i].get_nivel() << "\t" << "\t";
-        fclientes << ucc->get_Clientes()[i].get_estado() << "\t" << "\t";
-        fclientes << ucc->get_Clientes()[i].get_numCuenta() << "\t" << "\t";
-        fclientes << ucc->get_Clientes()[i].get_saldoPesos() << "\t" << "\t";
-        fclientes << ucc->get_Clientes()[i].get_saldoDolares() << endl;
+        fclientes << ucc.get_Clientes()[i].get_DNI() << "\t";
+        fclientes << ucc.get_Clientes()[i].get_nombre() << "\t";
+        fclientes << ucc.get_Clientes()[i].get_ingreso() << "\t";
+        fclientes << ucc.get_Clientes()[i].get_nivel() << "\t" << "\t";
+        fclientes << ucc.get_Clientes()[i].get_estado() << "\t" << "\t";
+        fclientes << ucc.get_Clientes()[i].get_numCuenta() << "\t" << "\t";
+        fclientes << ucc.get_Clientes()[i].get_saldoPesos() << "\t" << "\t";
+        fclientes << ucc.get_Clientes()[i].get_saldoDolares() << endl;
       }
     }
     else

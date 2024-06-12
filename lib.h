@@ -111,5 +111,5 @@ class sistema{
     void transaccionPorMes(int M);
     void transaccionPorAnio(int A);
     void mostrarTransacciones();
-    void guardarClientes(Banco *ucc);
+    void guardarClientes(Banco ucc);
 };

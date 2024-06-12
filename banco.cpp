@@ -169,12 +169,12 @@ void Banco::deposito(double monto,double numero,char moneda){
             if (moneda == 'P' || moneda =='p')
             {
                 Clientes[i].depositar_pesos(monto);
-                cout<< "Saldo: "<<Clientes[i].get_saldoPesos();
+                cout<< "Saldo: "<<Clientes[i].get_saldoPesos() << endl;
             }
             else if (moneda =='D' || moneda == 'd')
             {
                 Clientes[i].depositar_dolares(monto);
-                cout<< "Saldo: "<<Clientes[i].get_saldoDolares();
+                cout<< "Saldo: "<<Clientes[i].get_saldoDolares() << endl;
             }
             
         }
@@ -191,12 +191,12 @@ void Banco::extraer(double monto,double numero,char moneda){
             if (moneda == 'p'|| moneda == 'P')
             {
                 Clientes[i].retirar_pesos(monto);
-                cout << "Saldo: "<<Clientes[i].get_saldoPesos();
+                cout << "Saldo: "<<Clientes[i].get_saldoPesos() << endl;
             }
             else if (moneda=='d'|| moneda == 'D')
             {
                 Clientes[i].retirar_dolares(monto);
-                cout << "Saldo: "<<Clientes[i].get_saldoDolares();
+                cout << "Saldo: "<<Clientes[i].get_saldoDolares()<< endl;
             }
         }
     }
