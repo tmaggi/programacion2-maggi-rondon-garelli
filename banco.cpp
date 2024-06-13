@@ -31,6 +31,7 @@ void Banco::cargaclientes()
             getline(fclientes, aux);
             while (fclientes)
             {
+
                 if (fclientes.eof())
                 {
                     break;
@@ -249,7 +250,12 @@ void Banco::agregarCliente(string nom, int dni, string lvl)
     cantidadClientes += 1;
     delete[] Clientes;
     Clientes = new Cliente[cantidadClientes];
-    Clientes = aux;
+    for (int i = 0; i < cantidadClientes; i++)
+    {
+        Clientes[i] = aux[i];
+    }
+    delete[] aux;
+    
 }
 
 void Banco::credito(int numC, double monto)

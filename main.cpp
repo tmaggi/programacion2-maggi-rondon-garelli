@@ -294,6 +294,9 @@ int main(){
   {
     cerr << "Error de memoria"<< endl;
   }
+  catch(...){
+    cerr << "Error inesperado" << endl;
+  }
     
 
   system("pause");
