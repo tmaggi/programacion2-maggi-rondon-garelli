@@ -5,7 +5,8 @@
 #include <ctime>
 using namespace std;
 
-Banco::Banco(){
+Banco::Banco()
+{
     cantidadClientes = 0;
     Clientes = new Cliente[cantidadClientes]; //
 };
@@ -16,28 +17,28 @@ Banco::Banco(int cantidadClientes2)
     Clientes = new Cliente[cantidadClientes];
 };
 
-
-void Banco::cargaclientes(){
+void Banco::cargaclientes()
+{
     ifstream fclientes("fclientes.txt");
-    string dni, nombre,estado,nivel,auxPesos,auxDolares,aux,apellido;
-    int ingreso,numero_cuenta;
+    string nombre, estado, nivel, auxPesos, auxDolares, aux, apellido;
+    int ingreso, numero_cuenta, dni;
     int i = 0;
     try
     {
         if (fclientes.is_open())
-        {   
-            getline(fclientes,aux);
-            getline(fclientes,aux);
+        {
+            getline(fclientes, aux);
+            getline(fclientes, aux);
             while (fclientes)
             {
                 if (fclientes.eof())
                 {
                     break;
                 }
-                
+
                 fclientes >> dni;
                 fclientes >> nombre;
-                fclientes >>apellido;
+                fclientes >> apellido;
                 nombre = nombre + " ";
                 nombre = nombre + apellido;
                 fclientes >> ingreso;
@@ -47,7 +48,7 @@ void Banco::cargaclientes(){
                 fclientes >> auxPesos;
                 fclientes >> auxDolares;
 
-                Clientes[i].set_DNI(stoi(dni));
+                Clientes[i].set_DNI(dni);
                 Clientes[i].set_nombre(nombre);
                 Clientes[i].set_ingreso(ingreso);
                 Clientes[i].set_nivel(nivel);
@@ -60,34 +61,33 @@ void Banco::cargaclientes(){
         }
         else
         {
-           throw "No se pudo abrir el archivo";
+            throw "No se pudo abrir el archivo";
         }
         fclientes.close();
-
     }
-    catch(const char* exception)
+    catch (const char *exception)
     {
         cerr << "Error: " << exception << endl;
     }
-    catch(bad_alloc&)
+    catch (bad_alloc &)
     {
         cerr << "Error de memomoria" << endl;
     }
-    catch(...)
+    catch (...)
     {
         cerr << "Error desconocido" << endl;
     }
-
 }
 
-void Banco::detalleCliente(int numCuenta){
+void Banco::detalleCliente(int numCuenta)
+{
     bool encontrado = false;
     try
     {
         for (int i = 0; i < cantidadClientes; i++)
-        {       
+        {
             if (numCuenta == Clientes[i].get_numCuenta())
-            {            
+            {
                 cout << "DNI: " << Clientes[i].get_DNI() << endl;
                 cout << "Nombre: " << Clientes[i].get_nombre() << endl;
                 cout << "Ingreso: " << Clientes[i].get_ingreso() << endl;
@@ -97,26 +97,25 @@ void Banco::detalleCliente(int numCuenta){
                 cout << "Saldo en pesos: " << Clientes[i].get_saldoPesos() << endl;
                 cout << "Saldo en dolares: " << Clientes[i].get_saldoDolares() << endl;
                 encontrado = true;
-                
             }
-            
         }
         if (!encontrado)
         {
             throw "No se encontro el cliente";
         }
     }
-    catch(const char* exception)
+    catch (const char *exception)
     {
         cerr << "Error: " << exception << endl;
     }
-    catch(bad_alloc&)
+    catch (bad_alloc &)
     {
         cerr << "Error de memoria" << endl;
     }
 }
 
-void Banco::listadoClientes(){
+void Banco::listadoClientes()
+{
     for (int i = 0; i < cantidadClientes; i++)
     {
         cout << "DNI: " << Clientes[i].get_DNI() << endl;
@@ -127,19 +126,22 @@ void Banco::listadoClientes(){
         cout << "Numero de cuenta: " << Clientes[i].get_numCuenta() << endl;
         cout << "Saldo en pesos: " << Clientes[i].get_saldoPesos() << endl;
         cout << "Saldo en dolares: " << Clientes[i].get_saldoDolares() << endl;
-        cout<<"------------------------------------------------------------------"<<endl;
+        cout << "------------------------------------------------------------------" << endl;
     }
 }
 
-int Banco::get_cantidadClientes(){
+int Banco::get_cantidadClientes()
+{
     return cantidadClientes;
 }
 
-Cliente* Banco::get_Cliente(){
-    return Clientes;
+Cliente Banco::get_Cliente(int pos)
+{
+    return Clientes[pos];
 }
 
-int Banco::calcularClientes(){
+int Banco::calcularClientes()
+{
     ifstream fclientes("fclientes.txt");
     fclientes.open("fclientes.txt");
     int cantidad;
@@ -157,7 +159,7 @@ int Banco::calcularClientes(){
             throw "No se pudo abrir el archivo";
         }
     }
-    catch(const char* exception)
+    catch (const char *exception)
     {
         cerr << "Error: " << exception << endl;
         return -1;
@@ -165,49 +167,75 @@ int Banco::calcularClientes(){
     fclientes.close();
     return cantidad;
 }
-void Banco::deposito(double monto,double numero,char moneda){
-    for (int i = 0; i <cantidadClientes; i++)
+void Banco::deposito(long double monto, double numero, char moneda)
+{
+    bool encontrado = false;
+    try
     {
-        if (Clientes[i].get_numCuenta()==numero)
+        for (int i = 0; i < cantidadClientes; i++)
         {
-            if (moneda == 'P' || moneda =='p')
+            if (Clientes[i].get_numCuenta() == numero)
             {
-                Clientes[i].depositar_pesos(monto);
-                cout<< "Saldo: "<<Clientes[i].get_saldoPesos() << endl;
+                if (moneda == 'P' || moneda == 'p')
+                {
+                    Clientes[i].depositar_pesos(monto);
+                    cout << "Saldo: " << Clientes[i].get_saldoPesos() << endl;
+                    encontrado = true;
+                }
+                else if (moneda == 'D' || moneda == 'd')
+                {
+                    Clientes[i].depositar_dolares(monto);
+                    cout << "Saldo: " << Clientes[i].get_saldoDolares() << endl;
+                    encontrado = true;
+                }
             }
-            else if (moneda =='D' || moneda == 'd')
-            {
-                Clientes[i].depositar_dolares(monto);
-                cout<< "Saldo: "<<Clientes[i].get_saldoDolares() << endl;
-            }
-            
         }
-        
+        if (!encontrado)
+        {
+            throw "No se encontro el cliente";
+        }
     }
-    
+    catch (const char *exception)
+    {
+        cerr << "Error: " << exception << endl;
+    }
 }
-void Banco::extraer(double monto,double numero,char moneda){
-    for (int i = 0; i <cantidadClientes; i++)
+void Banco::extraer(long double monto, double numero, char moneda)
+{
+    bool encontrado = false;
+    try
     {
-        
-        if (Clientes[i].get_numCuenta()==numero)
+        for (int i = 0; i < cantidadClientes; i++)
         {
-            if (moneda == 'p'|| moneda == 'P')
+
+            if (Clientes[i].get_numCuenta() == numero)
             {
-                Clientes[i].retirar_pesos(monto);
-                cout << "Saldo: "<<Clientes[i].get_saldoPesos() << endl;
-            }
-            else if (moneda=='d'|| moneda == 'D')
-            {
-                Clientes[i].retirar_dolares(monto);
-                cout << "Saldo: "<<Clientes[i].get_saldoDolares()<< endl;
+                if (moneda == 'p' || moneda == 'P')
+                {
+                    Clientes[i].retirar_pesos(monto);
+                    cout << "Saldo: " << Clientes[i].get_saldoPesos() << endl;
+                }
+                else if (moneda == 'd' || moneda == 'D')
+                {
+                    Clientes[i].retirar_dolares(monto);
+                    cout << "Saldo: " << Clientes[i].get_saldoDolares() << endl;
+                }
             }
         }
+        if (!encontrado)
+        {
+            throw "No se encontro el cliente";
+        }
     }
- }
+    catch (const char *exception)
+    {
+        cerr << "Error: " << exception << endl;
+    }
+}
 
-void Banco::agregarCliente(string nom,int dni,string lvl){
-    Cliente *aux = new Cliente[cantidadClientes+1];
+void Banco::agregarCliente(string nom, int dni, string lvl)
+{
+    Cliente *aux = new Cliente[cantidadClientes + 1];
     for (int i = 0; i < cantidadClientes; i++)
     {
         aux[i] = Clientes[i];
@@ -216,21 +244,21 @@ void Banco::agregarCliente(string nom,int dni,string lvl){
     aux[cantidadClientes].set_DNI(dni);
     aux[cantidadClientes].set_nivel(lvl);
     time_t t = time(0);
-    tm* ahora = localtime(&t);
+    tm *ahora = localtime(&t);
     aux[cantidadClientes].set_ingreso(ahora->tm_year + 1900);
-    cantidadClientes++;
+    cantidadClientes += 1;
     delete[] Clientes;
     Clientes = new Cliente[cantidadClientes];
     Clientes = aux;
 }
 
-void Banco::credito(int numC,double monto){
+void Banco::credito(int numC, double monto)
+{
     for (int i = 0; i < cantidadClientes; i++)
     {
         if (Clientes[i].get_numCuenta() == numC)
         {
             Clientes[i].gastarlimite(monto);
         }
-        
     }
 }

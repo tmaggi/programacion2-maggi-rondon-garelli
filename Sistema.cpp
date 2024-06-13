@@ -201,24 +201,24 @@ void sistema::mostrarTransacciones(){
 
 void sistema::guardarClientes(Banco &ucc){
   ofstream fclientes("fclientes.txt");
-  cout << "entro a la funcio guardar clientes" << endl;
+  
   try
   {
     if (fclientes.is_open())
     {
-      cout << ucc.get_cantidadClientes() << endl;
+      fclientes << "Cantidad " << " de " << "clientes: " << ucc.get_cantidadClientes() << endl;
       fclientes << "DNI\tNombre\tIngreso\tNivel\tEstado\tNumero de cuenta\tSaldo en pesos\tSaldo en dolares" << endl;
       for (int i = 0; i < ucc.get_cantidadClientes(); i++)
       {
 
-        /*fclientes << ucc.get_Cliente(i).get_DNI() << "\t";
+        fclientes << ucc.get_Cliente(i).get_DNI() << "\t";
         fclientes << ucc.get_Cliente(i).get_nombre() << "\t";
         fclientes << ucc.get_Cliente(i).get_ingreso() << "\t";
         fclientes << ucc.get_Cliente(i).get_nivel() << "\t";
         fclientes << ucc.get_Cliente(i).get_estado() << "\t";
         fclientes << ucc.get_Cliente(i).get_numCuenta() << "\t";
         fclientes << ucc.get_Cliente(i).get_saldoPesos() << "\t";
-        fclientes << ucc.get_Cliente(i).get_saldoDolares() << endl;*/
+        fclientes << ucc.get_Cliente(i).get_saldoDolares() << endl;
       }
     }
     else

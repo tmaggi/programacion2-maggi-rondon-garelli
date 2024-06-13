@@ -1,2 +1,5 @@
-Cantidad de Clientes: 3
-DNI		Nombre		Ingreso		Nivel		Estado		Numero de Cuenta		Saldo Pesos		Saldo Dolares
+Cantidad de clientes: 3
+DNI	Nombre	Ingreso	Nivel	Estado	Numero de cuenta	Saldo en pesos	Saldo en dolares
+17469257	Juan Hernandez	2014	ORO	ACTIVO	185694	1.052e+06	1240
+38612894	Sofia Ludueña	2003	PLATINO	BAJA	269787	1.0036e+08	5428
+46128921	Santiago Perez	2022	PLATA	ACTIVO	658297	35009	0

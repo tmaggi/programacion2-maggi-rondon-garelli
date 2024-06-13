@@ -32,44 +32,44 @@ int CantClientes(){
 
 }
 
-void detalleCliente(Banco bancoUCC){
+void detalleCliente(Banco &bancoUCC){
   int numcuenta;
   cout << "Ingrese el numero de cuenta del cliente: ";
   cin >> numcuenta;
   bancoUCC.detalleCliente(numcuenta);
 }
 
-void listadoClientes(Banco bancoUCC){
+void listadoClientes(Banco &bancoUCC){
   bancoUCC.listadoClientes();
 }
 
-void transaccionesCliente(sistema sistemaUCC){
+void transaccionesCliente(sistema &sistemaUCC){
   int numcuenta;
   cout << "Ingrese el numero de cuenta del cliente: ";
   cin >> numcuenta;
   sistemaUCC.transaccionPorCliente(numcuenta);
 }
 
-void transaccionesMes(sistema sistemaUCC){
+void transaccionesMes(sistema &sistemaUCC){
   int mes;
   cout << "Ingrese el mes en formato numerico(mm): ";
   cin >> mes;
   sistemaUCC.transaccionPorMes(mes);
 }
 
-void transaccionesAnio(sistema sistemaUCC){
+void transaccionesAnio(sistema &sistemaUCC){
   int A;
   cout << "Ingrese el anio en formato numerico(yyyy): ";
   cin >> A;
   sistemaUCC.transaccionPorAnio(A);
 }
 
-void todasTransacciones(sistema sistemaUCC){
+void todasTransacciones(sistema &sistemaUCC){
   sistemaUCC.mostrarTransacciones();
 }
 
-void depositar(Banco bancoUCC){
-  double monto,numero;
+void depositar(Banco &bancoUCC){
+  long double monto,numero;
   char moneda;
   try
   {
@@ -110,8 +110,8 @@ void depositar(Banco bancoUCC){
   
   
 }
-void extraccion(Banco bancoUCC){
-  double monto,numero;
+void extraccion(Banco &bancoUCC){
+  long double monto,numero;
   char moneda;
   try
   {
@@ -153,7 +153,7 @@ void extraccion(Banco bancoUCC){
   
 }
 
-void credito(Banco BancoUCC){
+void credito(Banco &BancoUCC){
   double monto,numero;
   
   try{
@@ -185,8 +185,8 @@ void credito(Banco BancoUCC){
   
 }
 
-void agregarCliente(Banco bancoUCC){
-  string nom,lvl;
+void agregarCliente(Banco &bancoUCC){
+  string nom,lvl,apellido;
   int dni;
   try
   {
@@ -197,6 +197,9 @@ void agregarCliente(Banco bancoUCC){
     {
       cout << "Ingrese el nombre del cliente: ";
       cin >> nom;
+      cout << "Ingrese el apellido del cliente: ";
+      cin >> apellido;
+      nom = nom + " " + apellido;
       cout << "Ingrese el nivel del cliente: ";
       cin >> lvl;
       bancoUCC.agregarCliente(nom,dni,lvl);
@@ -215,7 +218,7 @@ void agregarCliente(Banco bancoUCC){
   
 }
 
-void Menu(int operacion,Banco bancoUCC,sistema sistemaUCC){
+void Menu(int operacion,Banco &bancoUCC,sistema &sistemaUCC){
   switch (operacion)
   {
   case 1:
@@ -265,7 +268,7 @@ int main(){
     Banco bancoUCC(CantClientes());
     sistema sistemaUCC;
     bancoUCC.cargaclientes();
-    /*sistemaUCC.guardarClientes(bancoUCC);*/
+    
     while (variable == "si")
     {
       cout << "ingrese la operacion que desea realizar: " << endl;
@@ -285,7 +288,7 @@ int main(){
       cout<<"si desea seguir operando, ingrese si"<<endl;
       cin >> variable;
     }
-    
+    sistemaUCC.guardarClientes(bancoUCC);
   }
   catch(bad_alloc& exception)
   {

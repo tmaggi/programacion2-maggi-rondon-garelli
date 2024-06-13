@@ -40,22 +40,22 @@ int Cuenta::get_numero_cuenta()
   return numero_cuenta;
 }
 
-void Cuenta::set_saldoPesos(double num)
+void Cuenta::set_saldoPesos(long double num)
 {
   saldoPesos = num;
 }
 
-double Cuenta::get_saldoPesos()
+long double Cuenta::get_saldoPesos()
 {
   return saldoPesos;
 }
 
-void Cuenta::set_saldoDolares(double num)
+void Cuenta::set_saldoDolares(long double num)
 {
   saldoDolares = num;
 }
 
-double Cuenta::get_saldoDolares()
+long double Cuenta::get_saldoDolares()
 {
   return saldoDolares;
 }
@@ -70,7 +70,7 @@ int Cuenta::get_limite()
   return limite;
 }
 
-void Cuenta::gastarlimite(long double num){
+void Cuenta::gastarlimite( double num){
   if (limite > num)
   {
     limite -= num;

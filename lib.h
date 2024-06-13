@@ -10,20 +10,20 @@ class Cuenta
 {
 private:
   long int numero_cuenta;
-  double saldoPesos;
-  double saldoDolares;
+  long double saldoPesos;
+  long double saldoDolares;
   int limite;
 public:
   Cuenta();
   void set_numero_cuenta(int num);
   int get_numero_cuenta();
-  void set_saldoPesos(double num);
-  double get_saldoPesos();
-  void set_saldoDolares(double num);
-  double get_saldoDolares(); 
+  void set_saldoPesos(long double num);
+  long double get_saldoPesos();
+  void set_saldoDolares(long double num);
+  long double get_saldoDolares(); 
   void set_limite(int num);
   int get_limite();
-  void gastarlimite(long double);
+  void gastarlimite(double);
 };
 
 class Persona 
@@ -54,10 +54,10 @@ public:
   Cliente();
   void set_estado(string est);
   string get_estado();
-  void depositar_dolares(double monto);
-  void depositar_pesos(double monto);
-  void retirar_pesos(double monto);
-  void retirar_dolares(double monto);
+  void depositar_dolares(long double monto);
+  void depositar_pesos(long double monto);
+  void retirar_pesos(long double monto);
+  void retirar_dolares(long double monto);
   int get_numCuenta();
   double get_saldoPesos();
   double get_saldoDolares();
@@ -93,11 +93,11 @@ public:
   void listadoClientes();
   void detalleCliente(int numCuenta);
   int get_cantidadClientes();
-  void deposito(double monto,double numero,char moneda);
-  void extraer(double monto,double numero,char moneda);
+  void deposito(long double monto,double numero,char moneda);
+  void extraer(long double monto,double numero,char moneda);
   void agregarCliente(string nom,int dni,string lvl);
   void credito(int numC,double monto);
-  Cliente* get_Cliente();
+  Cliente get_Cliente(int pos);
 };
 
 class sistema{

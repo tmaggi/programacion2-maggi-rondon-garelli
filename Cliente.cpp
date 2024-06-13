@@ -22,7 +22,7 @@ string Cliente::get_estado()
   return estado;
 }
 
-void Cliente::depositar_pesos(double monto)
+void Cliente::depositar_pesos(long double monto)
 {
   try
   {
@@ -41,7 +41,7 @@ void Cliente::depositar_pesos(double monto)
   }
 }
 
-void Cliente::depositar_dolares(double monto)
+void Cliente::depositar_dolares(long double monto)
 {
   try
   {
@@ -60,7 +60,7 @@ void Cliente::depositar_dolares(double monto)
   }
 }
 
-void Cliente::retirar_pesos(double monto)
+void Cliente::retirar_pesos(long double monto)
 {
   try
   {
@@ -79,7 +79,7 @@ void Cliente::retirar_pesos(double monto)
   }
 }
 
-void Cliente::retirar_dolares(double monto)
+void Cliente::retirar_dolares(long double monto)
 {
   try
   {
