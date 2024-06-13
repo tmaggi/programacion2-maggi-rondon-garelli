@@ -262,11 +262,10 @@ int main(){
   string variable = "si";
   try
   {
-    Banco bancoUCC(CantClientes()),*auxBanco;
+    Banco bancoUCC(CantClientes());
     sistema sistemaUCC;
     bancoUCC.cargaclientes();
-    auxBanco = &bancoUCC;
-    sistemaUCC.guardarClientes(auxBanco);
+    /*sistemaUCC.guardarClientes(bancoUCC);*/
     while (variable == "si")
     {
       cout << "ingrese la operacion que desea realizar: " << endl;
@@ -292,11 +291,6 @@ int main(){
   {
     cerr << "Error de memoria"<< endl;
   }
-  catch(...)
-  {
-    cerr << "ERROR" << endl;
-  }
-  
     
 
   system("pause");

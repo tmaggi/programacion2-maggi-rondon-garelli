@@ -199,50 +199,36 @@ void sistema::mostrarTransacciones(){
   ftransaccion.close();
 }
 
-void sistema::guardarClientes(Banco *UCC){
-  Banco ucc = *UCC;
+void sistema::guardarClientes(Banco &ucc){
   ofstream fclientes("fclientes.txt");
+  cout << "entro a la funcio guardar clientes" << endl;
   try
   {
-    
     if (fclientes.is_open())
     {
-      fclientes << "Cantidad de Clientes: " << ucc.get_cantidadClientes() << endl;
-      fclientes << "DNI" << "\t\t" << "Nombre" << "\t\t" << "Ingreso" << "\t\t" << "Nivel" << "\t\t" << "Estado" << "\t\t" << "Numero de Cuenta" << "\t\t" << "Saldo Pesos" << "\t\t" << "Saldo Dolares" << endl;
+      cout << ucc.get_cantidadClientes() << endl;
+      fclientes << "DNI\tNombre\tIngreso\tNivel\tEstado\tNumero de cuenta\tSaldo en pesos\tSaldo en dolares" << endl;
       for (int i = 0; i < ucc.get_cantidadClientes(); i++)
       {
-        Cliente aux = ucc.get_Cliente(i);
-        /*fclientes << aux.get_DNI() << "\t\t";*/
-        cout << aux.get_DNI() << "\t\t";
-        /*fclientes << aux.get_nombre() << "\t\t";*/
-        cout << aux.get_nombre() << "\t\t";
-        /*fclientes << aux.get_ingreso() << "\t\t";*/
-        cout << aux.get_ingreso() << "\t\t";
-        /*fclientes << aux.get_nivel() << "\t\t";*/
-        cout << aux.get_nivel() << "\t\t";
-        /*fclientes << aux.get_estado() << "\t\t";*/
-        cout << aux.get_estado() << "\t\t";
-        /*fclientes << aux.get_numCuenta() << "\t\t";*/
-        cout << aux.get_numCuenta() << "\t\t";
-        /*fclientes << aux.get_saldoPesos() << "\t\t";*/
-        cout << aux.get_saldoPesos() << "\t\t";
-        /*fclientes << aux.get_saldoDolares() << endl;*/
-        cout << aux.get_saldoDolares() << endl;
+
+        /*fclientes << ucc.get_Cliente(i).get_DNI() << "\t";
+        fclientes << ucc.get_Cliente(i).get_nombre() << "\t";
+        fclientes << ucc.get_Cliente(i).get_ingreso() << "\t";
+        fclientes << ucc.get_Cliente(i).get_nivel() << "\t";
+        fclientes << ucc.get_Cliente(i).get_estado() << "\t";
+        fclientes << ucc.get_Cliente(i).get_numCuenta() << "\t";
+        fclientes << ucc.get_Cliente(i).get_saldoPesos() << "\t";
+        fclientes << ucc.get_Cliente(i).get_saldoDolares() << endl;*/
       }
     }
     else
     {
       throw "No se pudo abrir el archivo";
     }
-
   }
   catch(const char* exception)
   {
     cerr << "Error: " << exception << endl;
-  }
-  catch(bad_alloc&)
-  {
-    cerr << "Error de memoria " << endl;
   }
   fclientes.close();
 

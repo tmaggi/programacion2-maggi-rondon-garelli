@@ -103,11 +103,11 @@ int Cliente::get_numCuenta()
   return cuenta.get_numero_cuenta();
 }
 
-long double Cliente::get_saldoPesos(){
+double Cliente::get_saldoPesos(){
   return cuenta.get_saldoPesos();
 }
 
-long double Cliente::get_saldoDolares(){
+double Cliente::get_saldoDolares(){
   return cuenta.get_saldoDolares();
 }
 

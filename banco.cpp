@@ -72,8 +72,12 @@ void Banco::cargaclientes(){
     catch(bad_alloc&)
     {
         cerr << "Error de memomoria" << endl;
-
     }
+    catch(...)
+    {
+        cerr << "Error desconocido" << endl;
+    }
+
 }
 
 void Banco::detalleCliente(int numCuenta){
@@ -131,8 +135,8 @@ int Banco::get_cantidadClientes(){
     return cantidadClientes;
 }
 
-Cliente Banco::get_Cliente(int pos){
-    return Clientes[pos];
+Cliente* Banco::get_Cliente(){
+    return Clientes;
 }
 
 int Banco::calcularClientes(){

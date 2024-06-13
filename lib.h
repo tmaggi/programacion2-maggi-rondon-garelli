@@ -59,8 +59,8 @@ public:
   void retirar_pesos(double monto);
   void retirar_dolares(double monto);
   int get_numCuenta();
-  long double get_saldoPesos();
-  long double get_saldoDolares();
+  double get_saldoPesos();
+  double get_saldoDolares();
   void set_nivel(string niv);
   string get_nivel();
   void set_numcuenta(int numero_cuenta);
@@ -93,11 +93,11 @@ public:
   void listadoClientes();
   void detalleCliente(int numCuenta);
   int get_cantidadClientes();
-  Cliente get_Cliente(int pos);
   void deposito(double monto,double numero,char moneda);
   void extraer(double monto,double numero,char moneda);
   void agregarCliente(string nom,int dni,string lvl);
   void credito(int numC,double monto);
+  Cliente* get_Cliente();
 };
 
 class sistema{
@@ -111,5 +111,5 @@ class sistema{
     void transaccionPorMes(int M);
     void transaccionPorAnio(int A);
     void mostrarTransacciones();
-    void guardarClientes(Banco *UCC);
+    void guardarClientes(Banco &ucc);
 };
